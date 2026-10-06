@@ -17,7 +17,7 @@ SELECT id_cliente, rua, bairro FROM enderecos WHERE estado = 'SP' AND cidade = '
 Não otimizado
 SELECT p.id, c.nome, p.valor_total FROM pedidos p INNER JOIN clientes c ON p.id_cliente = c.id WHERE YEAR(p.data_pedido) = 2026;
 Otimizado
-SELECT p.id, c.nome, p.valor_total FROM (SELECT id, id_cliente, valor_total, data_pedido FROM pedidos WHERE data_pedido >= '2026-01-01' AND data_pedido < '2027-01-01') p INNER JOIN clientes c ON p.id_cliente = c.id;
+SELECT p.id, c.nome, p.valor_total FROM p INNER JOIN clientes c ON p.id_cliente = c.id where data_pedido between '2026-01-01' and '2026-12-31';
 
 -- QUERY 4: Desperdício de Covering Index (Leitura física da tabela sem necessidade) -- Cenário: Tabela possui o índice composto (estado, cidade)
 Não otimizado
