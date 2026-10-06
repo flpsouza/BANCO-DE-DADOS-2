@@ -1,0 +1,99 @@
+-- QUERY 1: O "Caminhão de Lixo" (SELECT * sem restrição e sem limite) 
+SELECT * FROM clientes ORDER BY data_cadastro DESC;
+
+R:
+SELECT id, nome, email, data_cadastro
+FROM clientes
+ORDER BY data_cadastro DESC
+LIMIT 50;
+
+-- QUERY 2: Violação da hierarquia de índice (Leftmost Prefix ignorado) -- Cenário: A Tabela possui o índice composto (estado, cidade) 
+SELECT id_cliente, rua, bairro FROM enderecos WHERE cidade = 'Campinas';
+
+R:
+-- 1 opção : Incluir a coluna do prefixo caso seja conhecida na aplicação
+SELECT id_cliente, rua, bairro 
+FROM enderecos 
+WHERE estado = 'SP' AND cidade = 'Campinas';
+
+--2 Opção : Criar um índice dedicado se a busca for feita isoladamente por cidade.
+-- CREATE INDEX idx_enderecos_cidade ON enderecos(cidade);
+
+-- QUERY 3: Junção Tardia com Nested Loop pesado (Falta de filtragem prévia) 
+SELECT p.id, c.nome, p.valor_total FROM pedidos p INNER JOIN clientes c ON p.id_cliente = c.id WHERE YEAR(p.data_pedido) = 2026;
+
+R:
+SELECT p.id, c.nome, p.valor_total 
+FROM pedidos p 
+INNER JOIN clientes c ON p.id_cliente = c.id 
+WHERE p.data_pedido >= '2026-01-01' 
+  AND p.data_pedido < '2027-01-01';
+
+-- QUERY 4: Desperdício de Covering Index (Leitura física da tabela sem necessidade) -- Cenário: Tabela possui o índice composto (estado, cidade)
+ SELECT * FROM userinfo WHERE estado = 'SP';
+
+ R:
+SELECT estado, cidade 
+FROM userinfo 
+WHERE estado = 'SP';
+
+-- QUERY 5: A Query Monstro da Capa (Subconsulta correlacionada e DISTINCT desnecessário) 
+SELECT DISTINCT c.id, c.nome, SUM(p.valor) AS total_gasto, (SELECT MAX(sp.data_pedido) FROM pedidos sp WHERE sp.id_cliente = c.id) AS data_ultimo_pedido FROM clientes c JOIN pedidos p ON c.id = p.id_cliente WHERE c.data_cadastro >= '2023-01-01' AND c.status = 'ativo' GROUP BY c.id, c.nome ORDER BY total_gasto DESC;
+
+R:
+SELECT 
+    c.id, 
+    c.nome, 
+    SUM(p.valor) AS total_gasto, 
+    MAX(p.data_pedido) AS data_ultimo_pedido 
+FROM clientes c 
+INNER JOIN pedidos p ON c.id = p.id_cliente 
+WHERE c.data_cadastro >= '2023-01-01' 
+  AND c.status = 'ativo' 
+GROUP BY c.id, c.nome 
+ORDER BY total_gasto DESC;
+
+-- QUERY 6: Produto Cartesiano Velado (CROSS JOIN por falta de condição de junção) 
+SELECT p.nome, c.nome_categoria FROM produtos p, categorias c;
+
+R:
+SELECT p.nome, c.nome_categoria 
+FROM produtos p 
+INNER JOIN categorias c ON p.id_categoria = c.id;
+
+-- QUERY 7: Destruição do uso de índice em Árvore B+ por aplicação de funções no WHERE -- Cenário: Coluna data_criacao possui índice 
+SELECT id, status, total FROM faturas WHERE MONTH(data_criacao) = 3 AND YEAR(data_criacao) = 2026;
+
+R:
+SELECT id, status, total 
+FROM faturas 
+WHERE data_criacao >= '2026-03-01' 
+  AND data_criacao < '2026-04-01';
+
+-- QUERY 8: Type Mismatch forçando conversão implícita e varredura completa -- Cenário: Coluna codigo_transacao é VARCHAR(36) indexada
+SELECT id, valor, status FROM transacoes WHERE codigo_transacao = 9845720194;
+
+R:
+SELECT id, valor, status 
+FROM transacoes 
+WHERE codigo_transacao = '9845720194';
+
+-- QUERY 9: Gargalo de I/O por Subconsultas aninhadas com operador IN 
+SELECT id, nome, email FROM clientes WHERE id IN ( SELECT id_cliente FROM pedidos WHERE id_produto IN ( SELECT id FROM produtos WHERE categoria = 'Eletronicos' ) );]
+
+R:
+SELECT DISTINCT c.id, c.nome, c.email 
+FROM clientes c 
+INNER JOIN pedidos p ON c.id = p.id_cliente 
+INNER JOIN produtos pr ON p.id_produto = pr.id 
+WHERE pr.categoria = 'Eletronicos';
+
+-- QUERY 10: LEFT JOIN está sendo desnecessário limitando o otimizador no Nested Loop 
+SELECT c.id, c.nome, p.id AS pedido_id, p.valor_total FROM clientes c LEFT JOIN pedidos p ON c.id = p.id_cliente WHERE p.status = 'faturado' AND p.valor_total > 500;
+
+R:
+SELECT c.id, c.nome, p.id AS pedido_id, p.valor_total 
+FROM clientes c 
+INNER JOIN pedidos p ON c.id = p.id_cliente 
+WHERE p.status = 'faturado' 
+  AND p.valor_total > 500;
