@@ -1,0 +1,62 @@
+1°
+
+SELECT id, nome, data_cadastro 
+FROM clientes 
+ORDER BY data_cadastro DESC 
+LIMIT 50;
+
+
+2°
+
+SELECT id_cliente, rua, bairro 
+FROM enderecos 
+WHERE estado = 'SP' AND cidade = 'Campinas';
+
+3°
+
+SELECT p.id, c.nome, p.valor_total 
+FROM pedidos p 
+INNER JOIN clientes c ON p.id_cliente = c.id 
+WHERE p.data_pedido >= '2026-01-01' AND p.data_pedido < '2027-01-01';
+
+4°
+
+SELECT estado, cidade 
+FROM userinfo 
+WHERE estado = 'SP';
+
+5°
+
+
+6°
+
+SELECT p.nome, c.nome_categoria 
+FROM produtos p 
+INNER JOIN categorias c ON p.id_categoria = c.id;
+
+7°
+
+SELECT id, status, total 
+FROM faturas 
+WHERE data_criacao >= '2026-03-01' AND data_criacao < '2026-04-01';
+
+8°
+
+SELECT id, valor, status 
+FROM transacoes 
+WHERE codigo_transacao = '9845720194';
+
+9°
+
+SELECT DISTINCT c.id, c.nome, c.email 
+FROM clientes c
+JOIN pedidos p ON c.id = p.id_cliente
+JOIN produtos pr ON p.id_produto = pr.id
+WHERE pr.categoria = 'Eletronicos';
+
+10°
+
+SELECT c.id, c.nome, p.id AS pedido_id, p.valor_total 
+FROM clientes c 
+INNER JOIN pedidos p ON c.id = p.id_cliente 
+WHERE p.status = 'faturado' AND p.valor_total > 500;
