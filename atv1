@@ -1,0 +1,126 @@
+
+1 ATV. O "Caminhão de Lixo" (SELECT * sem restrição e sem limite)
+
+– Não atomizada
+SELECT * FROM clientes ORDER BY data_cadastro DESC;
+
+-- Versão Otimizada
+SELECT id, nome, email, data_cadastro 
+FROM clientes 
+WHERE data_cadastro >= '2026-01-01'
+ORDER BY data_cadastro DESC 
+LIMIT 50;
+
+2 ATV
+Violação da hierarquia de índice (Leftmost Prefix ignorado)
+Cenário: Tabela possui índice composto (estado, cidade)
+
+– Não otimizado 
+SELECT id_cliente, rua, bairro FROM enderecos WHERE cidade = 'Campinas'
+
+– otimizado 
+SELECT id_cliente, rua, bairro 
+FROM enderecos 
+WHERE estado = 'SP' AND cidade = 'Campinas';
+
+3 ATV.Junção Tardia com Nested Loop pesado (Falta de filtragem prévia)
+
+Não otimizado 
+SELECT p.id, c.nome, p.valor_total FROM pedidos p INNER JOIN clientes c ON p.id_cliente = c.id WHERE YEAR(p.data_pedido) = 2026;
+
+Otimizado 
+SELECT p.id, c.nome, p.valor_total 
+FROM pedidos p 
+INNER JOIN clientes c ON p.id_cliente = c.id 
+WHERE p.data_pedido >= '2026-01-01' AND p.data_pedido < '2027-01-01';
+
+4 ATV.Desperdício de Covering Index
+Cenário: Tabela possui índice composto (estado, cidade)
+
+– Não otimizado 
+SELECT * FROM userinfo WHERE estado = 'SP';
+
+– Otimizado 
+SELECT id, estado, cidade 
+FROM userinfo 
+WHERE estado = 'SP';
+
+5ATV.A Query Monstro da Capa (Subconsulta correlacionada e DISTINCT desnecessário)
+Não Otimizado:
+
+– Não otimizado 
+SELECT DISTINCT c.id, c.nome, SUM(p.valor) AS total_gasto, (SELECT MAX(sp.data_pedido) FROM pedidos sp WHERE sp.id_cliente = c.id) AS data_ultimo_pedido FROM clientes c JOIN pedidos p ON c.id = p.id_cliente WHERE c.data_cadastro >= '2023-01-01' AND c.status = 'ativo' GROUP BY c.id, c.nome ORDER BY total_gasto DESC;
+
+– otimizado
+SELECT 
+    c.id, 
+    c.nome, 
+    SUM(p.valor) AS total_gasto, 
+    MAX(p.data_pedido) AS data_ultimo_pedido 
+FROM clientes c 
+INNER JOIN pedidos p ON c.id = p.id_cliente 
+WHERE c.data_cadastro >= '2023-01-01' 
+  AND c.status = 'ativo' 
+GROUP BY c.id, c.nome 
+ORDER BY total_gasto DESC;
+
+6ATV Produto Cartesiano Velado (CROSS JOIN)8
+
+– Não otimizado 
+SELECT p.nome, c.nome_categoria FROM produtos p, categorias c;
+
+– Otimizado 
+SELECT p.nome, c.nome_categoria 
+FROM produtos p 
+INNER JOIN categorias c ON p.id_categoria = c.id;
+
+7ATV Destruição do uso de índice em Árvore B+ por aplicação de funções no WHERE
+Cenário: Coluna data_criacao possui índice
+
+– Não otimizado 
+SELECT id, status, total FROM faturas WHERE MONTH(data_criacao) = 3 AND YEAR(data_criacao) = 2026;
+
+– Otimizado 
+SELECT id, status, total 
+FROM faturas 
+WHERE data_criacao >= '2026-03-01' AND data_criacao < '2026-04-01';
+
+8ATV Type Mismatch forçando conversão implícita
+Cenário: Coluna codigo_transacao é VARCHAR(36) indexada
+
+– Não atomizado
+SELECT id, valor, status FROM transacoes WHERE codigo_transacao = 9845720194;
+
+– Otimizado 
+SELECT id, valor, status 
+FROM transacoes 
+WHERE codigo_transacao = '9845720194';
+
+9ATV
+
+– Não otimizado 
+SELECT id, valor, status FROM transacoes WHERE codigo_transacao = 9845720194;
+
+– otimizado 
+SELECT id, valor, status 
+FROM transacoes 
+WHERE codigo_transacao = '9845720194';
+
+9ATV Gargalo de I/O por Subconsultas aninhadas com operador IN
+
+– Não otimizado 
+SELECT id, nome, email FROM clientes WHERE id IN ( SELECT id_cliente FROM pedidos WHERE id_produto IN ( SELECT id FROM produtos WHERE categoria = 'Eletronicos' ) );
+
+– Otimizado 
+SELECT DISTINCT c.id, c.nome, c.email 
+FROM clientes c
+INNER JOIN pedidos pe ON c.id = pe.id_cliente
+INNER JOIN produtos pr ON pe.id_produto = pr.id
+WHERE pr.categoria = 'Eletronicos';
+
+
+
+
+
+
+
