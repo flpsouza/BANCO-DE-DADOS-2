@@ -11,12 +11,7 @@ LIMIT 50;
 SELECT id_cliente, rua, bairro FROM enderecos WHERE cidade = 'Campinas';
 
 RESPOSTA:
--- Opção A: Incluir a coluna do prefixo caso seja conhecida na aplicação
-SELECT id_cliente, rua, bairro 
-FROM enderecos 
-WHERE estado = 'SP' AND cidade = 'Campinas';
 
--- Opção B: Criar um índice dedicado se a busca for feita isoladamente por cidade.
 -- CREATE INDEX idx_enderecos_cidade ON enderecos(cidade);
 
 -- QUERY 3: Junção Tardia com Nested Loop pesado (Falta de filtragem prévia) 
