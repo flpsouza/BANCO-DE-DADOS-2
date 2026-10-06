@@ -7,20 +7,20 @@ FROM clientes
 ORDER BY data_cadastro DESC
 LIMIT 50;
 
--- QUERY 2: Violação da hierarquia de índice (Leftmost Prefix ignorado) -- Cenário: A Tabela possui o índice composto (estado, cidade) 
+-- QUERY 2: Violação da hierarquia de índice (Leftmost Prefix ignorado) Cenário: A Tabela tem o índice composto (estado, cidade) 
 SELECT id_cliente, rua, bairro FROM enderecos WHERE cidade = 'Campinas';
 
 R:
--- 1 opção : Incluir a coluna do prefixo caso seja conhecida na aplicação
+-- 1 opção : Incluir a coluna do prefixo caso seja reconhecida na aplicação
 SELECT id_cliente, rua, bairro 
-FROM enderecos 
+FROM enderecos;
 WHERE estado = 'SP' AND cidade = 'Campinas';
 
---2 Opção : Criar um índice dedicado se a busca for feita isoladamente por cidade.
+--2 Opção : Criar um índice dedicado se a busca for  isolada por cidade.
 -- CREATE INDEX idx_enderecos_cidade ON enderecos(cidade);
 
 -- QUERY 3: Junção Tardia com Nested Loop pesado (Falta de filtragem ) 
-SELECT p.id, c.nome, p.valor_total FROM pedidos p INNER JOIN clientes c ON p.id_cliente = c.id WHERE YEAR(p.data_pedido) = 2026;
+SELEC p.id, c.nome, p.valor_total FROM pedidos p INNER JOIN clientes c ON p.id_cliente = c.id WHERE YEAR(p.data_pedido) = 2026;
 
 R:
 SELECT p.id, c.nome, p.valor_total 
@@ -34,7 +34,7 @@ WHERE p.data_pedido >= '2026-01-01'
 
  R:
 SELECT estado, cidade 
-FROM userinfo 
+FROM userinfo;
 WHERE estado = 'SP';
 
 -- QUERY 5: A Query Monstro da Capa (Subconsulta correlacionada e DISTINCT desnecessário) 
@@ -70,7 +70,7 @@ FROM faturas
 WHERE data_criacao >= '2026-03-01' 
   AND data_criacao < '2026-04-01';
 
--- QUERY 8: Type Mismatch forçando conversão implícita e varredura completa -- Cenário: Coluna codigo_transacao é VARCHAR(36) indexada
+-- QUERY 8: Type Mismatch forçando conversão implícita e varredura  -- Cenário: Coluna codigo_transacao é VARCHAR(36) indexada
 SELECT id, valor, status FROM transacoes WHERE codigo_transacao = 9845720194;
 
 R:
