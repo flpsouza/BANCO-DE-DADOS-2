@@ -1,0 +1,145 @@
+-- ==========================================================
+-- ATIVIDADE DE OTIMIZAÇÃO DE BANCO DE DADOS E SQL
+-- ==========================================================
+
+-- ----------------------------------------------------------
+-- QUESTÃO 1: O "Caminhão de Dados" (Uso excessivo de SELECT * sem paginação)
+-- ----------------------------------------------------------
+-- Consulta original:
+-- SELECT * FROM clientes ORDER BY data_cadastro DESC;
+
+-- SOLUÇÃO:
+SELECT id, nome, email, data_cadastro 
+FROM clientes 
+ORDER BY data_cadastro DESC 
+LIMIT 40;
+
+
+-- ----------------------------------------------------------
+-- QUESTÃO 2: Quebra da Regra do Leftmost Prefix em Índice Composto
+-- Cenário: A tabela possui um índice composto nas colunas (estado, cidade)
+-- ----------------------------------------------------------
+-- Consulta original:
+-- SELECT id_cliente, rua, bairro FROM enderecos WHERE cidade = 'Campinas';
+
+-- SOLUÇÃO (Alternativa 1 - Incluindo o prefixo conhecido):
+SELECT id_cliente, rua, bairro 
+FROM enderecos 
+WHERE estado = 'SP' AND cidade = 'Campinas';
+
+-- (Alternativa 2 - Criando índice dedicado, se necessário):
+-- CREATE INDEX idx_cidade_isolada ON enderecos(cidade);
+
+
+-- ----------------------------------------------------------
+-- QUESTÃO 3: Junção Tardia com Custo Elevado (Falta de pré-filtragem)
+-- ----------------------------------------------------------
+-- Consulta original:
+-- SELECT p.id, c.nome, p.valor_total FROM pedidos p INNER JOIN clientes c ON p.id_cliente = c.id WHERE YEAR(p.data_pedido) = 2026;
+
+-- SOLUÇÃO:
+SELECT p.id, c.nome, p.valor_total 
+FROM pedidos p 
+INNER JOIN clientes c ON p.id_cliente = c.id 
+WHERE p.data_pedido >= '2026-01-01' 
+  AND p.data_pedido < '2027-01-01';
+
+
+-- ----------------------------------------------------------
+-- QUESTÃO 4: Desperdício de Covering Index (Leitura desnecessária de linhas na tabela)
+-- Cenário: A tabela possui o índice composto (estado, cidade)
+-- ----------------------------------------------------------
+-- Consulta original:
+-- SELECT * FROM userinfo WHERE estado = 'SP';
+
+-- SOLUÇÃO:
+SELECT estado, cidade 
+FROM userinfo 
+WHERE estado = 'SP';
+
+
+-- ----------------------------------------------------------
+-- QUESTÃO 5: A Query Complexa (Subconsulta correlacionada com DISTINCT redundante)
+-- ----------------------------------------------------------
+-- Consulta original:
+-- SELECT DISTINCT c.id, c.nome, SUM(p.valor) AS total_gasto, (SELECT MAX(sp.data_pedido) FROM pedidos sp WHERE sp.id_cliente = c.id) AS data_ultimo_pedido FROM clientes c JOIN pedidos p ON c.id = p.id_cliente WHERE c.data_cadastro >= '2023-01-01' AND c.status = 'ativo' GROUP BY c.id, c.nome ORDER BY total_gasto DESC;
+
+-- SOLUÇÃO:
+SELECT 
+    c.id, 
+    c.nome, 
+    SUM(p.valor) AS total_gasto, 
+    MAX(p.data_pedido) AS data_ultimo_pedido 
+FROM clientes c 
+INNER JOIN pedidos p ON c.id = p.id_cliente 
+WHERE c.data_cadastro >= '2023-01-01' 
+  AND c.status = 'ativo' 
+GROUP BY c.id, c.nome 
+ORDER BY total_gasto DESC;
+
+
+-- ----------------------------------------------------------
+-- QUESTÃO 6: Produto Cartesiano Oculto (Ausência de condição de junção)
+-- ----------------------------------------------------------
+-- Consulta original:
+-- SELECT p.nome, c.nome_categoria FROM produtos p, categorias c;
+
+-- SOLUÇÃO:
+SELECT p.nome, c.nome_categoria 
+FROM produtos p 
+INNER JOIN categorias c ON p.id_categoria = c.id;
+
+
+-- ----------------------------------------------------------
+-- QUESTÃO 7: Invalidação de Índice B+ Tree pelo Uso de Funções no WHERE
+-- Cenário: A coluna data_criacao é indexada.
+-- ----------------------------------------------------------
+-- Consulta original:
+-- SELECT id, status, total FROM faturas WHERE MONTH(data_criacao) = 3 AND YEAR(data_criacao) = 2026;
+
+-- SOLUÇÃO:
+SELECT id, status, total 
+FROM faturas 
+WHERE data_criacao >= '2026-03-01' 
+  AND data_criacao < '2026-04-01';
+
+
+-- ----------------------------------------------------------
+-- QUESTÃO 8: Type Mismatch (Incompatibilidade de Tipos gerando Full Table Scan)
+-- Cenário: A coluna codigo_transacao é do tipo VARCHAR(36) e possui índice.
+-- ----------------------------------------------------------
+-- Consulta original:
+-- SELECT id, valor, status FROM transacoes WHERE codigo_transacao = 9845720194;
+
+-- SOLUÇÃO:
+SELECT id, valor, status 
+FROM transacoes 
+WHERE codigo_transacao = '9845720194';
+
+
+-- ----------------------------------------------------------
+-- QUESTÃO 9: Gargalo de Performance com Subconsultas Aninhadas via IN
+-- ----------------------------------------------------------
+-- Consulta original:
+-- SELECT id, nome, email FROM clientes WHERE id IN ( SELECT id_cliente FROM pedidos WHERE id_produto IN ( SELECT id FROM produtos WHERE categoria = 'Eletrodomesticos' ) );
+
+-- SOLUÇÃO:
+SELECT DISTINCT c.id, c.nome, c.email 
+FROM clientes c 
+INNER JOIN pedidos p ON c.id = p.id_cliente 
+INNER JOIN produtos pr ON p.id_produto = pr.id 
+WHERE pr.categoria = 'Eletrodomesticos';
+
+
+-- ----------------------------------------------------------
+-- QUESTÃO 10: Uso Desnecessário de LEFT JOIN Limitando o Otimizador
+-- ----------------------------------------------------------
+-- Consulta original:
+-- SELECT c.id, c.nome, p.id AS pedido_id, p.valor_total FROM clientes c LEFT JOIN pedidos p ON c.id = p.id_cliente WHERE p.status = 'faturado' AND p.valor_total > 500;
+
+-- SOLUÇÃO:
+SELECT c.id, c.nome, p.id AS pedido_id, p.valor_total 
+FROM clientes c 
+INNER JOIN pedidos p ON c.id = p.id_cliente 
+WHERE p.status = 'faturado' 
+  AND p.valor_total > 500;
