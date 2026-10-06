@@ -12,7 +12,11 @@ SELECT id_cliente, rua, bairro FROM enderecos WHERE cidade = 'Campinas';
 
 RESPOSTA:
 
--- CREATE INDEX idx_enderecos_cidade ON enderecos(cidade);
+CREATE INDEX idx_enderecos_cidade ON enderecos(cidade);
+
+SELECT id_cliente, rua, bairro
+FROM enderecos
+WHERE cidade = 'Campinas';
 
 -- QUERY 3: Junção Tardia com Nested Loop pesado (Falta de filtragem prévia) 
 SELECT p.id, c.nome, p.valor_total FROM pedidos p INNER JOIN clientes c ON p.id_cliente = c.id WHERE YEAR(p.data_pedido) = 2026;
