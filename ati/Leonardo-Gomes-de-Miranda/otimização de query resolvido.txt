@@ -1,0 +1,57 @@
+Centro Universitário Meta
+Professor: Felipe 
+Comp. Curricular: Banco de Dados II
+Aluno: Leonardo Gomes de Miranda
+Data: 06 de outubro de 2026           Turma: ENG06N
+
+--> Otimização de Query
+
+Query 1 otimizada: SELECT id, nome, email, data_cadastro FROM clientes 
+ORDER BY data_cadastro DESC
+LIMIT 50;
+
+Query 2 otimizada: SELECT id_cliente, rua, bairro
+FROM enderecos
+WHERE estado = 'Sao Paulo' AND cidade = 'Campinas';
+
+
+Query 3 otimizada: SELECT p.id, c.nome, p.valor_total 
+FROM pedidos p 
+INNER JOIN clientes c ON p.id_cliente = c.id 
+WHERE p.data_pedido >= '2026-01-01' AND p.data_pedido < '2027-01-01';
+
+Query 4 otimizada: SELECT estado, cidade 
+FROM userinfo 
+WHERE estado = 'Sao Paulo';
+
+Query 5 otimizada: SELECT c.id, c.nome, 
+SUM(p.valor) AS total_gasto, 
+MAX(p.data_pedido) AS data_ultimo_pedido 
+FROM clientes c 
+INNER JOIN pedidos p ON c.id = p.id_cliente 
+WHERE c.data_cadastro >= '2023-01-01' AND c.status = 'ativo' 
+GROUP BY c.id, c.nome 
+ORDER BY total_gasto DESC;
+ 
+Query 6 otimizada: SELECT p.nome, c.nome_categoria 
+FROM produtos p 
+INNER JOIN categorias c ON p.id_categoria = c.id;
+
+Query 7 otimizada: SELECT id, status, total 
+FROM faturas 
+WHERE data_criacao >= '2026-03-01' AND data_criacao < '2026-04-01';
+
+Query 8 otimizada: SELECT id, valor, status 
+FROM transacoes 
+WHERE codigo_transacao = '9845720194';
+
+Query 9 otimizada: SELECT DISTINCT c.id, c.nome, c.email 
+FROM clientes c 
+INNER JOIN pedidos p ON c.id = p.id_cliente 
+INNER JOIN produtos pr ON p.id_produto = pr.id 
+WHERE pr.categoria = 'Eletronicos';
+
+Query 10 otimizada: SELECT c.id, c.nome, p.id AS pedido_id, p.valor_total 
+FROM clientes c 
+INNER JOIN pedidos p ON c.id = p.id_cliente 
+WHERE p.status = 'faturado' AND p.valor_total > 500;
