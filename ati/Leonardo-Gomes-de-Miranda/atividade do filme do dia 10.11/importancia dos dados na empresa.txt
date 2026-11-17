@@ -1,0 +1,12 @@
+Centro Universitário Meta
+Curso: Engenharia da Computação
+Professor: Felipe Souza
+Comp. Curricular: Banco de Dados II
+Aluno: Leonardo Gomes de Miranda
+Data: 12/11/2026 Turma: ENG N06
+
+---> Importância da coleta de dados em uma empresa e um paralelo entre o filme "O Homem que Mudou o Jogo" 
+
+A coleta de dados e informações é importante para uma empresa tomar decisões com evidências concretas sem se basear em situações hipotéticas. Quando uma organização analisa e registra todo seu desempenho (seja voltado em finanças, vendas e operações), ela ganha uma boa visibilidade da sua saúde financeira, identifica, com mais preparo, falhas e desperdícios que podem gerar gastos desnecessários. Além disso, esses dados também mostram as preferências dos clientes quanto aos seus produtos e ajudam a empresa a direcionar investimentos de marketing para um público engajado e manter a competitividade no mercado.
+
+Esse cenário pode ser visto no filme O Homem que Mudou o Jogo, no qual Billy Beane (gerente geral do time de beisebol) precisa reestruturar a equipe com um orçamento bem limitado. Ele monta a nova equipe se baseando em análises técnicas e estatísticas dos novos jogadores e não em falácias, e então descobre que os jogadores tinham desempenhos superiores em métricas que os concorrentes maiores muitas vezes ignoravam.
