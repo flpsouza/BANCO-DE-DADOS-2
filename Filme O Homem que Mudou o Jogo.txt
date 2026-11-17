@@ -1,0 +1,6 @@
+Filme O Homem que Mudou o Jogo
+
+Resumo do filme:
+
+	Em geral, o filme acompanha a vida de Beane, o gerente geral do time de beisebol, que enfrenta uma crise orçamentária após perder seus melhores jogadores para equipes mais ricas. Sem recursos financeiros para competir no modelo tradicional de contratações, Beane se alia a Peter, um jovem economista que utiliza modelos estatísticos avançados para avaliar o desempenho real dos atletas. Ignorando o consenso dos olheiros tradicionais, a dupla monta um elenco competitivo a baixo custo, focado em métricas objetivas como a capacidade de chegar às bases. Apesar da forte resistência interna e de um início turbulento, o método se prova eficaz ao levar o time a um recorde histórico de 20 vitórias consecutivas na Liga Americana, demonstrando que a análise rigorosa de dados pode superar limitações financeiras e vieses humanos.
+	O uso do Excel (e sistemas estatísticos iniciais) por Peter Brand funciona na prática como um MVP (Produto Mínimo Viável) de um sistema de apoio à decisão. Na Engenharia, antes de construir arquiteturas complexas ou bancos de dados robustos, muitas vezes validamos a lógica de negócio e os algoritmos em ferramentas tabulares limpas e estruturadas, transformando dados brutos (histórico de partidas) em informação útil.
