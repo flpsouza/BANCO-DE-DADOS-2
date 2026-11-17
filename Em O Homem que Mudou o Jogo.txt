@@ -1,0 +1,7 @@
+Em O Homem que Mudou o Jogo (Moneyball, 2011), Billy Beane, gerente do time de beisebol Oakland Athletics, precisa reconstruir a equipe com um orçamento limitado. Com a ajuda do economista Peter Brand, ele passa a analisar estatísticas de desempenho para orientar as contratações. Um dos indicadores usados pela dupla é a frequência com que cada atleta consegue chegar à base, o que ajuda a identificar jogadores pouco valorizados por outros clubes.
+
+Para a disciplina de Banco de Dados, o filme ajuda a entender como registros se transformam em informações. O resultado de cada ida ao bastão é um dado. Quando esses registros são organizados por jogador e por temporada, é possível calcular indicadores e comparar desempenhos. Para que essa comparação seja confiável, a coleta precisa seguir critérios consistentes, pois registros incompletos ou duplicados podem distorcer os resultados.
+
+Um dos pontos mais interessantes do filme é a resistência dos profissionais acostumados aos métodos tradicionais de avaliação. Esse conflito mostra que adotar uma estratégia baseada em dados também exige saber interpretar os indicadores e explicar por que eles são relevantes para a decisão.
+
+Nas empresas, o mesmo princípio se aplica à gestão de estoque. Ao cruzar o histórico de vendas com os registros de estoque, por exemplo, uma loja pode identificar quais produtos precisam de reposição e quais estão sobrando. Assim, o filme mostra como a coleta e a organização de dados relevantes ajudam uma empresa a tomar decisões mais fundamentadas e a aproveitar melhor seus recursos.
