@@ -1,0 +1,19 @@
+Desafio: como reduzir o tempo de estoque na Rota 10?
+
+1- Calculem a média de dias em estoque por modelo. Qual demora mais para sair?
+SUV (42+50+47+38)/4 = 44,25
+Hatch (14+16+12)/3 = 14
+Sedã (29)/1 = 29
+O SUV é o que mais demora para sair, com média de 44,25 dias e o Hatch possui o menor tempo com 14 dias.
+2- Grão = 1 linha por venda.
+Dimensões = categorias: modelo, região, canal.
+Medidas = números: valor, desconto, dias em estoque.
+Dimensões: 
+	Modelo: SUV	Região: 3-Norte/1-Sul	Canal: 3-Online/1-Loja
+	Modelo: Hatch	Região: 3-Centro	Canal: 2-Loja/1-Online
+	Modelo: Sedã	Região: 1-Sul		Canal: 1-Loja
+Medidas: 
+	Modelo: SUV	Venda: 475mil
+	Modelo: Hatch	Venda: 
+	Modelo: Sedã
+                      
