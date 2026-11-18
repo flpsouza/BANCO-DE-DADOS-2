@@ -1,0 +1,20 @@
+Como reduzir o tempo de estoque na Rota 10?
+
+1- Qual demora mais para sair?
+O SUV, apesar do seu número de vendas estando em uma média de 120, ele é quem passa mais tempo no estoque em comparação ao hatch que fica por pelo menos uma semana no estoque.
+
+2- Modelagem para o SUV
+
+MÊS| REGIÃO | CANAL |   VENDA  | DESCONTO | ESTOQUE
+JAN| NORTE  | ONLINE|   118K   |    4%    |     42
+FEV| NORTE  | LOJA  |   121K   |    2%    |     50
+MAR| NORTE  | ONLINE|   119K   |    5%    |     47
+MAR|  SUL   | ONLINE|   117K   |    6%    |     38
+
+3- Foi observado que o SUV passava mais tempo no estoque apesar de suas vendas, em Janeiro seu tempo de estoque foi de 42 dias pela loja ,e em Fevereiro ficou 50 dias pelo Canal 
+online para a região norte. Na região sul, o tempo de estoque do SUV foi de 38 e foram vendidos 117mil, pois houve um desconto de 6%, indicando que a venda foi mais rápida em relação 
+a região norte. O que pode ser feito para diminuir o tempo de estoque do SUV na região Norte?
+
+4-  Aplicar descontos melhores para os SUVs da região norte pode aumentar a velocidade das vendas e diminuir o tempo em estoque
+
+
