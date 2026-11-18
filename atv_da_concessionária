@@ -1,0 +1,57 @@
+atv1
+suv 42+50+38+47= 92+38+47= 130+47= 177/4= 
+hatch 14+16+12= 30+12= 42/3= 
+
+ media suv 44,25
+ media hatch 14
+ meia sedã 3
+ oque mais demora SUV
+
+atv2
+
+1 linha
+dimensões = categoria = hatch, centro, loja
+medidas = números: 72 mil, 2%, 14
+
+2 linha
+dimensões = categoria = SUV, Norte, online
+medidas = números: 118mil, 4%, 42
+
+3 linha
+dimensões = categoria = SUV, Norte,loja
+medidas = números: 121mil, 2%, 50
+
+4linha
+dimensões = categoria = hatch, centro, online
+medidas = números: 74mil, 5%, 16
+
+5linha 
+dimensões = categoria = sedã, norte, loja
+medidas = números: 98mil,3%, 29
+
+6linha
+dimensões = categoria = suv, norte, online
+medidas = números: 119mil, 5%, 47
+
+7linha
+dimensões = categoria = hatch, centro, loja
+medidas = números: 73mil, 2%, 12
+
+8linha
+dimensões = categoria = suv, Sul, online
+medidas = números: 117mil, 6%, 38
+
+3atv
+ Pergunta: Por que os SUVs demoram tanto para vender (média de 44,25 dias), mesmo quando recebem descontos maiores?
+ Dados extras necessários: Histórico maior de vendas (12 meses), detalhes dos carros parados
+ (cor e versão) e motivos pelos quais os clientes desistem da compra.
+
+
+atv4
+RECOMENDEM
+
+ Ação: Reduzir a compra de novos SUVs da fábrica para evitar excesso no pátio e criar promoções (como taxa zero)
+ para carros parados há mais de 30 dias.
+ Indicador (KPI): Tempo Médio em Estoque por modelo (com meta de baixar para menos de 30 dias).
+ Cuidado com os dados: A amostra tem apenas 8 vendas, então é preciso confirmar esse padrão com
+ dados de mais meses antes de tomar decisões definitivas.
