@@ -13,7 +13,20 @@ Dimensões:
 	Modelo: Hatch	Região: 3-Centro	Canal: 2-Loja/1-Online
 	Modelo: Sedã	Região: 1-Sul		Canal: 1-Loja
 Medidas: 
-	Modelo: SUV	Venda: 475mil
-	Modelo: Hatch	Venda: 
-	Modelo: Sedã
-                      
+	Modelo: SUV	Venda: 475mil	Desconto: 4,25%	Dias em estoque: 177 dias
+	Modelo: Hatch	Venda: 219mil	Desconto: 3%	Dias em estoque: 42 dias
+	Modelo: Sedã	Venda: 98mil	Desconto: 3%	Dias em estoque: 29 dias
+					Média de desconto
+3- Criem uma pergunta de mineração e indiquem quais dados extras ajudariam a respondê-la.
+Pergunta:
+ "Existe uma relação entre a porcentagem de desconto para os dias em estoque dos carros"
+Dados:
+ Quantidade em estoque
+ Valores dos modelos
+ Categoria de cada modelo
+
+4-Proponham uma ação, um indicador para acompanhá-la e um cuidado com os dados.
+Ação:
+ "Criar campanhas promocionais direcionadas ou revisar a estratégia de preços para os SUVs na região Norte/Online, visto que apresentam os maiores tempos em estoque"
+Cuidado: 
+ Como a maostra é muito pequena, deve-se tomar cuidado para a tomada das decisões.
