@@ -1,0 +1,49 @@
+Centro Universitário Meta 
+
+Curso: Engenharia da Computação 
+
+Professor: Felipe Souza 
+
+Comp. Curricular: Banco de Dados II 
+
+Aluno: Leonardo Gomes de Miranda 
+
+Data: 17 de novembro de 2026    Turma: ENG N06 
+
+ 
+
+Data Warehouse e Data Mining 
+
+ 
+
+1. Comparem - Calculem a média de dias em estoque por modelo. Qual demora mais para sair?  
+
+SUV tem 4 registros (42 + 50 + 47 + 38 = 177) 
+
+177 / 4 = média de 44,25 dias. 
+
+Hatch tem 3 registros (14 + 16 + 12 = 42) 
+
+42 / 3 = média de 14 dias. 
+
+Sedã tem apenas 1 registro (29) 
+
+29 / 1 = média de 29 dias. 
+
+O estoque que mais demora para sair é o da SUV com a média de 44,25 dias. 
+
+ 
+
+2. Modelem - Grão = 1 linha por venda. Dimensões = categorias: modelo, região, canal. Medidas = números: valor, desconto, dias em estoque. 
+
+O grão define que cada linha da tabela mostra uma venda concluída no modelo aplicado na base da concessionária rota 10. É visto que a tabela central armazena as medidas numéricas da operação, nos quais são: valor de venda (em R$ mil), o percentual de desconto e o tempo de estoque (em dias). Ao redor dela é presente as tabelas de dimensões que dão contexto para as vendas, mostradas pelas categorias de data, modelo de veículo, região da loja e local de atendimento. 
+
+3. Investiguem - Criem uma pergunta de mineração e indiquem quais dados extras ajudariam a respondê-la. 
+
+Vendo que três das quatro vendas de SUV ocorreram na região Norte com longos períodos de estoque e que a única venda no Sul teve o maior desconto e o menor tempo parado, a pergunta de mineração que pode ser proposta é: "Qual é o impacto do percentual de desconto e da região de venda na redução do tempo de estoque dos veículos SUV?"  
+
+Para responder essa pergunta será necessário ter dados extras do sistema de CRM, sendo elas: quantidade de visitas, test-drives e propostas recusadas por região. Além disso tudo, é preciso ter as especificações técnicas do estoque, informações demográficas e de faixa de renda dos clientes locais. 
+
+4. Recomendem - Proponham uma ação, um indicador para acompanhá-la e um cuidado com os dados. 
+
+É recomendado realizar um teste controlado na região Norte oferecendo condições comerciais direcionadas para SUVs parados há mais de trinta dias antes de aplicar a campanha em toda a rede. Portanto para acompanhar os resultados dessa iniciativa, é necessário monitorar o indicador de dias médios em estoque da categoria SUV em conjunto com a margem líquida por venda para garantir que o giro aumente sem comprometer a rentabilidade. E por último, o principal cuidado com os dados é não confundir correlação com causalidade em uma amostra pequena tendo em mente que os registros atuais servem apenas como pistas para uma possível validação, além de exigir uma padronização rigorosa de nomes e datas para evitar confusões durante a análise. 
