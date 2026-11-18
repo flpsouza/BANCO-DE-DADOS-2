@@ -1,0 +1,21 @@
+Atividade Banco de Dados II – Data Warehouse e Data Mining – 17/11
+
+Desafio: como reduzir o tempo de estoque na Rota 10?
+
+1) Comparem: Calculem a média de dias em estoque por modelo. Qual demora mais para sair?
+
+	A média de dias que cada modelo passa no estoque antes da venda é a seguinte: Hatch – 14 dias; SUV – 44,25 dias; Sedã – 29 dias. Com base nesses resultados, o modelo SUV é o que passa mais tempo no estoque.
+
+2) Modelem: Grão = 1 linha por venda; Dimensões = Categorias – modelo, região, canal; Medidas = números, valor, desconto, dias em estoque.
+
+	Cada grão da tabela é uma venda de um carro. As dimensões abrangem os campos de modelo, região e canal, fornecendo contexto as perguntas sobre qual, onde e como. Por fim as medidas da tabela são o preço da venda, o valor de desconto e o tempo no estoque, dados quantitativos que respondem o quanto e quantos, nesse caso a quantidade de dias no estoque e o custo da venda.  
+
+3) Investiguem: Criem uma pergunta de mineração e indiquem quais dados extras ajudariam a respondê-la
+
+Pergunta de mineração: Quais regiões/canais preferem comprar quais modelos?
+
+Resposta: O modelo Hatch é mais propenso a ser vendido na região do centro e pela loja física, o SUV foi mais vendido na região norte através do canal online. O sedã foi vendido na região sul por meio da loja.
+
+
+4) Recomendem: Proponham uma ação, um indicador para acompanhá-la e um cuidado com os dados.
+	Para uma tentativa de diminuir o tempo no estoque para os veículos, pode-se tentar fazer uma campanha de marketing para os modelos Hatch e SUV para atrair a atenção nas áreas em que são mais propensos a eles: o Hatch seria promovido nas lojas da região central, enquanto que o SUV seria destacado na plataforma online para usuários do sul. Para acompanhar o efeito dessas campanhas, o campo de dias no estoque deve ser considerado um indicador de performance, assim como precisa ser atentado os campos de região e canal para confirmar o andamento contínuo deste padrão de consumo.
