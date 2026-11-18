@@ -1,0 +1,48 @@
+Aluno: Fredson Renato Cardoso Trindade
+Curso: Engenharia da Computação
+Disciplina: Banco de Dados II
+
+Atividade — Concessionária Rota 10
+
+1) Calculem a média de dias em estoque por modelo. Qual demora mais para sair?
+
+Para encontrar o tempo médio de permanência dos veículos no estoque,
+foram somados os dias registrados para cada modelo e divididos pela quantidade de vendas.
+
+- Hatch: (14 + 16 + 12) ÷ 3 = 14 dias.
+- SUV: (42 + 50 + 47 + 38) ÷ 4 = 44,25 dias.
+- Sedã: 29 dias.
+
+A partir dos resultados, podemos observar que o SUV apresenta o maior tempo médio de permanência,
+aproximadamente 44 dias. Já o Hatch possui a menor média, com apenas 14 dias.
+
+2) Identifiquem o grão, as dimensões e as medidas.
+
+Grão: Cada registro da base de dados corresponde a uma venda de veículo realizada pela concessionária.
+
+Dimensões: São as informações utilizadas para classificar as vendas, como o modelo do veículo,
+a região e o canal utilizado para a comercialização.
+
+Medidas: Correspondem aos dados quantitativos, como o valor da venda, o percentual de desconto concedido e o número de dias que o veículo permaneceu no estoque.
+
+3) Criem uma pergunta de mineração e indiquem quais dados extras ajudariam a respondê-la.
+
+Pergunta: Quais fatores podem estar contribuindo para que os SUVs apresentem um tempo de permanência maior no estoque?
+
+Para investigar essa situação, seria interessante analisar outros dados, como os preços praticados por concessionárias concorrentes, o histórico de procura pelos SUVs e as preferências dos consumidores em cada região.
+
+Essas informações permitiriam compreender melhor o comportamento das vendas e identificar possíveis motivos para a demora na comercialização desse modelo.
+
+4) Proponham uma ação, um indicador para acompanhá-la e um cuidado com os dados.
+
+Ação: Uma alternativa seria desenvolver estratégias de venda voltadas aos SUVs, 
+utilizando ofertas especiais e condições comerciais mais atrativas.
+Além disso, a concessionária poderia rever a quantidade de veículos desse modelo adquirida,
+considerando a procura dos clientes.
+
+Indicador: O acompanhamento poderia ser realizado por meio do tempo médio de permanência dos SUVs no estoque.
+A proposta seria reduzir esse período dos atuais 44,25 dias para aproximadamente 35 dias, avaliando os resultados mensalmente.
+
+Cuidado com os dados: É necessário considerar que a análise foi realizada com uma quantidade limitada de registros.
+Como a base apresenta somente oito vendas, os resultados não são suficientes para representar todo o desempenho da concessionária.
+Por isso, seria importante utilizar um histórico maior antes de definir mudanças nas estratégias comerciais.
