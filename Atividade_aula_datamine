@@ -1,0 +1,37 @@
+Aluno: Leandro Duarte Marques 
+Curso: Eng. da Computação
+
+Banco de Dados II
+
+
+1) Calculem a média de dias em estoque por modelo. Qual demora mais para sair?
+
+Hatch: 14, 16, 12 = 14 Dias 
+SUV: 42, 50, 47, 38 =  44 dias 
+Sedã: 29 Dias 
+
+O modelo SUV é o que mais demora a sair de estoque.
+
+
+
+2)Grão = 1 linha por venda.
+Dimensões = categorias: modelo, região, canal.
+Medidas = números: valor, desconto, dias em estoque.
+
+
+3)Criem uma pergunta de mineração e indiquem quais dados extras ajudariam a respondê-la.
+
+"Por que os modelos SUV permanecem tanto tempo no estoque, comparado aos outros modelos?"
+Com o objetivo de responder essa dúvida, teríamos que levantar informações adicionais como:  
+  -Preço em comparação a concorrência 
+  -Quantidade de clientes com interesse no modelo
+  -Preferencia do modelo por região
+
+
+4)Proponham uma ação, um indicador para acompanhá-la e um cuidado com os dados.
+ Poderia ter alguma criação de companhas promocionais especificamente para o modelo SUV, de preferencia nas regiões onde se tem uma demora exorbitante de venda.
+Também seria importante ajustar a quantidade que se é adquirada do modelo , pois fazendo esse levantamento, já se tem uma base de que a venda é demorada.
+
+Deve-se acompanhar mensalmente a média de dias em estoque dos SUVs , buscando diminuir de 44 para 35 dias .
+
+Na amostra do Slide, não podemos afirmar que esse comportamento representa toda a concessionária, mostrando apenas 8 vendas, sendo quatro SUVs.
