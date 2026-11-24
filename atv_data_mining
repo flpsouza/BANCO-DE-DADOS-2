@@ -1,0 +1,32 @@
+1- COMPARAR: Média de dias em estoque por modelo:
+
+O modelo que demora mais para sair é o SUV, com uma média de 44,25 dias em estoque 
+
+O calculo usado foi esse: (42 + 50 + 47 + 38)/4 = 177/4 = 44,25 dias
+
+2- MODELAR: Estruturação dos dados do SUV
+
+MÊS| REGIÃO | CANAL |   VENDA  | DESCONTO | ESTOQUE
+JAN| NORTE  | ONLINE|   118K   |    4%    |     42
+FEV| NORTE  | LOJA  |   121K   |    2%    |     50
+MAR| NORTE  | ONLINE|   119K   |    5%    |     47
+MAR|  SUL   | ONLINE|   117K   |    6%    |     38
+
+3- INVESTIGAR: Pergunta de mineração e dados extras
+
+Pergunta de Mineração
+A alta quantidade de estoque do SUV é causado pela baixa demanda específica da região Norte ou pela resistência ao preço sem descontos mais agressivos?
+
+Dados extras necessários para responder:   
+- Histórico de propostas perdidas, para saber se clientes desistem do SUV por preço ou taxa de financiamento
+- Nível de estoque inicial e reposição, para verificar se a concessionária está comprando mais SUVs para o Norte do que a região absorve
+- Versão, cor e ano/modelo dos SUVs parados, para identificar se há encalhe de configurações específicas)
+- Preços e condições da concorrência na região Norte
+
+4- RECOMENDEM: Plano de ação para o SUV
+
+Ação - Reajustar a política de descontos do SUV no Norte (faixa de 5%–6%) com foco no atendimento de loja e pausar novas compras do modelo para essa praça até normalizar o pátio
+
+Indicador - Tempo Médio de Estoque do SUV em dias e a Margem Líquida por veículo vendido
+
+Cuidado com os dados: A base atual possui apenas 4 vendas de SUV (amostra muito pequena) e nenhuma venda na região Centro, então tomar decisões de corte de estoque apenas com poucos registros pode gerar uma medida equivocada, é obrigatório validar se esse padrão se repete nos últimos 6 a 12 meses de vendas antes de alterar a política de compras da concessionária
